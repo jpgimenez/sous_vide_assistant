@@ -1,0 +1,9 @@
+{
+  "name": "Sous Vide Assistant",
+  "domain": "sous_vide_assistant",
+  "documentation": "https://github.com/jpgimenez/sous_vide_assistant",
+  "codeowners": ["@jpgimenez"],
+  "requirements": ["openai"],
+  "version": "1.0.0",
+  "config_flow": true
+}
