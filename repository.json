@@ -1,0 +1,8 @@
+{
+  "name": "Sous Vide Assistant",
+  "content_in_root": false,
+  "domains": ["sous_vide_assistant"],
+  "country": "global",
+  "zip_release": true,
+  "filename": "sous_vide_assistant.zip"
+}

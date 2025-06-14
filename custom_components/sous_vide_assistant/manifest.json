@@ -1,0 +1,10 @@
+{
+  "domain": "sous_vide_assistant",
+  "name": "Sous Vide Assistant",
+  "version": "1.0.0",
+  "documentation": "https://github.com/tu_usuario/sous_vide_assistant",
+  "requirements": ["openai"],
+  "dependencies": [],
+  "codeowners": ["@tu_usuario"],
+  "config_flow": true
+}
