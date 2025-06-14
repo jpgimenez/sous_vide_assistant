@@ -5,12 +5,13 @@ from .const import DOMAIN, TARGET_TEMP_SENSOR, TIME_REMAINING_SENSOR
 import openai
 import logging
 
+
 _LOGGER = logging.getLogger(__name__)
+
 
 async def async_setup_entry(hass, entry, async_add_entities):
     api_key = entry.data["openai_api_key"]
     model = entry.data.get("model", "gpt-4")
-    openai.api_key = api_key
 
     guess_sensor = SousVideGuessSensor(hass, model)
     icon_sensor = SousVideIconSensor(hass, model)
@@ -31,7 +32,9 @@ async def async_setup_entry(hass, entry, async_add_entities):
         )
 
         try:
-            response = openai.ChatCompletion.create(
+            client = openai.OpenAI(api_key=api_key)
+
+            response = client.chat.completions.create(
                 model=model,
                 messages=[{"role": "user", "content": prompt}],
                 max_tokens=30,
@@ -43,6 +46,7 @@ async def async_setup_entry(hass, entry, async_add_entities):
             _LOGGER.error("Error al inferir plato sous vide: %s", e)
 
     async_track_state_change_event(hass, [TARGET_TEMP_SENSOR, TIME_REMAINING_SENSOR], infer_dish)
+
 
 class SousVideGuessSensor(Entity):
     def __init__(self, hass, model):
@@ -57,6 +61,7 @@ class SousVideGuessSensor(Entity):
     @property
     def state(self):
         return self._state
+
 
 class SousVideIconSensor(Entity):
     def __init__(self, hass, model):
